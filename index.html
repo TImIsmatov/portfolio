@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тимур Исматов — Game Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070f;--s1:#0d0d1a;--s2:#131325;--s3:#1a1a30;
+  --b1:#252540;--b2:#353560;
+  --pu:#7c6af7;--pu2:#a599ff;
+  --go:#f5c842;--go2:#ffd966;
+  --mi:#00e5a0;--ro:#ff6b9d;--sk:#60c8ff;
+  --tx:#f0f0fa;--md:#8888aa;--mu:#44445a;
+  --mono:'Space Mono',monospace;
+  --head:'Unbounded',sans-serif;
+  --body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--body);overflow-x:hidden;cursor:none}
+#C{width:8px;height:8px;background:var(--go);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#CR{width:30px;height:30px;border:1.5px solid var(--pu);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .14s ease;opacity:.5}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(124,106,247,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(124,106,247,.025) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:16px 56px;background:rgba(7,7,15,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--b1)}
+.nlogo{font-family:var(--mono);font-size:10px;color:var(--go);letter-spacing:.2em}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{font-family:var(--mono);font-size:9px;color:var(--mu);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .2s;cursor:none}
+.nlinks a:hover{color:var(--tx)}
+.nopen{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:var(--mi);letter-spacing:.12em}
+.ndot{width:6px;height:6px;background:var(--mi);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center;padding:120px 56px 80px;position:relative;z-index:2}
+.htag{font-family:var(--mono);font-size:10px;color:var(--mi);letter-spacing:.25em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.htag::before{content:'';width:28px;height:1px;background:var(--mi)}
+.hname{font-family:var(--head);font-size:clamp(44px,5vw,84px);font-weight:900;line-height:.92;letter-spacing:-.04em;margin-bottom:10px}
+.hname span{color:var(--pu)}
+.hrole{font-family:var(--mono);font-size:11px;color:var(--go);letter-spacing:.15em;text-transform:uppercase;margin-bottom:22px}
+.hbio{font-size:16px;color:var(--md);line-height:1.8;max-width:500px;margin-bottom:36px}
+.hbio b{color:var(--tx)}
+.hstats{display:flex;gap:32px;margin-bottom:36px}
+.hs{display:flex;flex-direction:column;gap:3px}
+.hsv{font-family:var(--head);font-size:36px;font-weight:900;color:var(--go);line-height:1}
+.hsl{font-family:var(--mono);font-size:8px;color:var(--mu);letter-spacing:.12em;text-transform:uppercase}
+.hbtns{display:flex;gap:12px}
+.btn{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:13px 24px;border:1.5px solid;text-decoration:none;transition:all .2s;cursor:none;display:inline-block}
+.btnp{background:var(--pu);border-color:var(--pu);color:#fff}.btnp:hover{background:var(--pu2);border-color:var(--pu2);transform:translateY(-2px)}
+.btng{background:transparent;border-color:var(--b2);color:var(--md)}.btng:hover{border-color:var(--go);color:var(--go);transform:translateY(-2px)}
+.rcard{background:var(--s1);border:1px solid var(--b1);padding:22px}
+.rbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:11px;border-bottom:1px solid var(--b1)}
+.rtitle{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em}
+#retChart{width:100%;height:190px;display:block}
+.rleg{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.rli{font-family:var(--mono);font-size:8px;color:var(--mu);display:flex;align-items:center;gap:5px}
+.rdot{width:10px;height:3px;border-radius:1px}
+
+/* SECTIONS */
+.sec{padding:88px 56px;max-width:1240px;margin:0 auto;position:relative;z-index:2}
+.sechead{display:flex;align-items:center;gap:16px;margin-bottom:52px}
+.secn{font-family:var(--mono);font-size:9px;color:var(--pu);letter-spacing:.2em}
+.sect{font-family:var(--head);font-size:36px;font-weight:900;letter-spacing:-.03em}
+.secl{flex:1;height:1px;background:var(--b1);margin-left:12px}
+.div{height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent);margin:0 56px}
+
+/* TABS */
+.ptabs{display:flex;border-bottom:1px solid var(--b1);margin-bottom:44px}
+.ptab{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:12px 22px;cursor:none;color:var(--mu);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.ptab:hover{color:var(--tx)}.ptab.on{color:var(--go);border-bottom-color:var(--go)}
+.ppanel{display:none}.ppanel.on{display:block}
+
+/* ═══════════ TIMELINE ═══════════ */
+.tl-wrap{background:var(--s1);border:1px solid var(--b1);padding:40px;margin-bottom:3px}
+.tl-head{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.12em;text-transform:uppercase;margin-bottom:36px;display:flex;justify-content:space-between;align-items:center}
+.tl-badge{display:flex;align-items:center;gap:5px;color:var(--mi)}
+.timeline{position:relative;padding-left:36px}
+.timeline::before{content:'';position:absolute;left:7px;top:12px;bottom:12px;width:2px;background:linear-gradient(180deg,var(--ro),var(--sk),var(--pu),var(--mi))}
+.tls{position:relative;margin-bottom:44px}.tls:last-child{margin-bottom:0}
+.tld{position:absolute;left:-36px;top:4px;width:16px;height:16px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;font-size:8px;background:var(--bg)}
+.tld.p{border-color:var(--ro);color:var(--ro)}.tld.r{border-color:var(--sk);color:var(--sk)}
+.tld.s{border-color:var(--pu);color:var(--pu)}.tld.re{border-color:var(--mi);color:var(--mi)}
+.tll{font-family:var(--mono);font-size:8px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
+.tll.p{color:var(--ro)}.tll.r{color:var(--sk)}.tll.s{color:var(--pu)}.tll.re{color:var(--mi)}
+.tlt{font-family:var(--head);font-size:17px;font-weight:700;margin-bottom:8px}
+.tlb{font-size:14px;color:var(--md);line-height:1.78}.tlb b{color:var(--tx)}
+.tlm{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.tlmv{background:var(--s2);border:1px solid var(--b1);padding:10px 14px}
+.tlmn{font-family:var(--head);font-size:20px;font-weight:900;color:var(--go)}
+.tlml{font-family:var(--mono);font-size:7px;color:var(--mu);letter-spacing:.1em;text-transform:uppercase}
+
+/* ═══════════ TWO-COL ═══════════ */
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:3px}
+.panel{background:var(--s1);border:1px solid var(--b1);padding:30px}
+.ptitle{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+
+/* ═══════════ SCHEME ═══════════ */
+.scheme-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.sc{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid var(--b1);border-radius:3px}
+.sc.f{background:rgba(124,106,247,.15);border-color:var(--pu)}
+.sc.g{background:rgba(245,200,66,.12);border-color:var(--go)}
+.sc.l{background:rgba(0,229,160,.1);border-color:var(--mi)}
+.sc.x{background:rgba(255,107,157,.1);border-color:var(--ro)}
+.sc.b{background:rgba(96,200,255,.12);border-color:var(--sk)}
+.sc.e{background:var(--s3)}
+
+/* ═══════════ GDD ═══════════ */
+.gdd{background:var(--s1);border:1px solid var(--b1);margin-bottom:3px}
+.gddhd{padding:16px 22px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center}
+.gddht{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em;text-transform:uppercase}
+.gddsec{border-bottom:1px solid var(--b1)}.gddsec:last-child{border-bottom:none}
+.gddtog{width:100%;background:none;border:none;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;cursor:none;transition:background .2s}
+.gddtog:hover,.gddtog.on{background:var(--s2)}
+.gddtl{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.gddtl em{color:var(--pu);font-style:normal}
+.gddarr{font-size:9px;color:var(--mu);transition:transform .25s}
+.gddtog.on .gddarr{transform:rotate(90deg)}
+.gddbody{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.gddbody.on{max-height:1000px}
+.gddcont{padding:18px 22px;border-top:1px solid var(--b1)}
+.gddrow{display:grid;grid-template-columns:150px 1fr;gap:10px;margin-bottom:10px;font-size:13px}
+.gddk{font-family:var(--mono);font-size:9px;color:var(--pu);letter-spacing:.06em;padding-top:2px}
+.gddv{color:var(--md);line-height:1.65}.gddv b{color:var(--tx)}
+.gddtbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:9px;margin-top:8px}
+.gddtbl th{text-align:left;padding:6px 10px;border-bottom:1px solid var(--b1);color:var(--pu);letter-spacing:.06em;font-weight:400}
+.gddtbl td{padding:6px 10px;border-bottom:1px solid rgba(37,37,64,.5);color:var(--md)}
+.gddtbl td:first-child{color:var(--tx)}.gddtbl tr:hover td{background:var(--s3)}
+.gddnote{background:rgba(124,106,247,.07);border-left:2px solid var(--pu);padding:10px 14px;font-size:12px;color:var(--md);line-height:1.65;margin-top:8px}
+.gddnote b{color:var(--pu)}
+
+/* ═══════════ MATCH-3 ═══════════ */
+.gw{background:var(--s1);border:1px solid var(--b1);overflow:hidden;margin-bottom:3px}
+.ghdr{padding:16px 24px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center}
+.ghdrt{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em;text-transform:uppercase}
+.glayout{display:grid;grid-template-columns:1fr 240px}
+.gmain{padding:20px;border-right:1px solid var(--b1)}
+.ghud{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:12px}
+.hbox{background:var(--s2);border:1px solid var(--b1);padding:9px 10px;text-align:center}
+.hv{font-family:var(--head);font-size:20px;font-weight:900;color:var(--go);line-height:1}
+.hl{font-family:var(--mono);font-size:7px;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+#board{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;background:var(--s2);padding:10px;border:1px solid var(--b1);position:relative;overflow:hidden}
+.cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0;border:1.5px solid var(--b1);cursor:none;border-radius:4px;position:relative;user-select:none;overflow:hidden;transition:border-color .12s,transform .12s,background .12s}
+.cell .tile-gem{width:64%;height:64%;display:block;border-radius:2px;transition:transform .12s}
+.cell:hover:not(.locked) .tile-gem{transform:scale(1.15)}
+.cell.sel .tile-gem{transform:scale(1.18)}
+/* Flower = circle purple */ .tile-f{background:var(--pu);border-radius:50%;box-shadow:0 0 6px rgba(124,106,247,.5)}
+/* Gem = diamond gold */ .tile-g{background:var(--go);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 6px rgba(245,200,66,.4)}
+.cell:hover:not(.locked) .tile-g{transform:rotate(45deg) scale(1.15)}
+.cell.sel .tile-g{transform:rotate(45deg) scale(1.18)}
+/* Leaf = rounded square mint */ .tile-l{background:var(--mi);border-radius:35%;box-shadow:0 0 6px rgba(0,229,160,.4)}
+/* Bomb */ .tile-bomb-ico{font-size:18px;line-height:1}
+/* Rainbow */ .tile-rb{background:linear-gradient(135deg,var(--pu),var(--go),var(--mi));border-radius:50%;box-shadow:0 0 10px rgba(124,106,247,.5)}
+.cell:hover:not(.locked){border-color:var(--pu2);transform:scale(1.06)}
+.cell.sel{border-color:var(--go);background:rgba(245,200,66,.12);transform:scale(1.09);box-shadow:0 0 14px rgba(245,200,66,.35)}
+.cell.locked{opacity:.45;pointer-events:none}
+.cell.hinted{border-color:var(--mi);animation:hintPulse 1.2s ease infinite}
+.cell.bomb-tile{background:rgba(255,107,157,.1);border-color:var(--ro)}
+.cell.star-tile{background:rgba(96,200,255,.1);border-color:var(--sk)}
+.cell.rainbow-tile{background:rgba(124,106,247,.15);border-color:var(--pu);animation:rainbowGlow 2s infinite}
+@keyframes hintPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,160,.4)}50%{box-shadow:0 0 0 6px rgba(0,229,160,0)}}
+@keyframes rainbowGlow{0%,100%{box-shadow:0 0 0 0 rgba(124,106,247,.5)}50%{box-shadow:0 0 8px 2px rgba(124,106,247,.3)}}
+.cell.pop{animation:cellPop .35s ease forwards}
+@keyframes cellPop{0%{transform:scale(1.15)}50%{transform:scale(0.9)}100%{transform:scale(1)}}
+.cell.vanish{animation:cellVanish .35s ease forwards}
+@keyframes cellVanish{0%{transform:scale(1.2);opacity:1}100%{transform:scale(0);opacity:0}}
+.cell.drop-in{animation:cellDrop .3s ease forwards}
+@keyframes cellDrop{0%{transform:translateY(-20px);opacity:0}100%{transform:translateY(0);opacity:1}}
+
+/* SCORE POP */
+.score-pop{position:fixed;font-family:var(--head);font-size:14px;font-weight:900;pointer-events:none;z-index:9000;animation:scoreFly .8s ease forwards;white-space:nowrap;text-shadow:0 0 8px currentColor}
+@keyframes scoreFly{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-50px) scale(.7);opacity:0}}
+
+/* PARTICLE */
+.particle{position:fixed;pointer-events:none;font-size:13px;z-index:9001;animation:ptcl .6s ease forwards}
+@keyframes ptcl{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--px),var(--py)) scale(0);opacity:0}}
+
+/* SCREEN SHAKE */
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-2px)}60%{transform:translate(-3px,3px)}80%{transform:translate(3px,-1px)}}
+.shake{animation:shake .3s ease}
+
+/* COMBO FLASH */
+.combo-flash{position:fixed;top:45%;left:50%;transform:translate(-50%,-50%) scale(0);font-family:var(--head);font-size:44px;font-weight:900;color:var(--go);pointer-events:none;z-index:9002;text-shadow:0 0 30px rgba(245,200,66,.8);opacity:0}
+.combo-flash.show{animation:comboAnim .7s ease forwards}
+@keyframes comboAnim{0%{transform:translate(-50%,-50%) scale(0);opacity:1}50%{transform:translate(-50%,-60%) scale(1.2);opacity:1}100%{transform:translate(-50%,-75%) scale(.8);opacity:0}}
+
+/* PROGRESS */
+.prog-wrap{margin-top:10px}
+.prog-info{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--mu);margin-bottom:5px}
+.prog-bar{height:5px;background:var(--b1);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;transition:width .4s ease;background:linear-gradient(90deg,var(--pu),var(--go))}
+
+/* BOOSTERS */
+.boost-row{display:flex;gap:6px;margin-top:10px}
+.bst{flex:1;background:var(--s2);border:1px solid var(--b1);padding:8px 6px;font-family:var(--mono);font-size:7px;color:var(--mu);letter-spacing:.06em;text-align:center;cursor:none;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bst:hover{border-color:var(--go);color:var(--go)}
+.bst.active{border-color:var(--mi);color:var(--mi);background:rgba(0,229,160,.07)}
+.bst .bi{font-size:18px}
+.bst .bc{color:var(--pu2)}
+
+/* GAME SIDEBAR */
+.gside{padding:18px;display:flex;flex-direction:column;gap:10px;background:var(--s2)}
+.glog{background:var(--bg);border:1px solid var(--b1);padding:11px;font-family:var(--mono);font-size:8px;line-height:2;height:190px;overflow-y:auto}
+.glog .ll{display:flex;gap:5px}
+.lt{color:var(--mu)}.lm{color:var(--mi)}.lg{color:var(--go)}.li{color:var(--md)}.lw{color:var(--ro)}.ls{color:var(--sk)}
+.gbtn{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;border:1px solid var(--b1);cursor:none;transition:all .2s;background:none;color:var(--mu);display:flex;justify-content:space-between}
+.gbtn:hover{border-color:var(--go);color:var(--go)}
+.gdnote{background:var(--bg);border:1px solid var(--b1);padding:11px;font-size:11px;color:var(--mu);line-height:1.65}
+.gdnote b{font-family:var(--mono);font-size:8px;color:var(--pu);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+
+/* ═══════════ WANDERPATH PUZZLE ═══════════ */
+.nw{background:var(--s1);border:1px solid var(--b1);overflow:hidden}
+.nhdr{padding:16px 24px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center}
+.nhdrt{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em;text-transform:uppercase}
+.nlayout{display:grid;grid-template-columns:1fr 260px}
+.nmain{padding:20px;border-right:1px solid var(--b1);min-height:540px;display:flex;flex-direction:column;gap:12px}
+
+/* PUZZLE HUD */
+.pzhud{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.pzbox{background:var(--s2);border:1px solid var(--b1);padding:8px 10px;text-align:center}
+.pzv{font-family:var(--head);font-size:18px;font-weight:900;line-height:1;color:var(--go)}
+.pzl{font-family:var(--mono);font-size:7px;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+
+/* PUZZLE GRID */
+.pz-grid-wrap{background:var(--s2);border:1px solid var(--b1);padding:10px;display:flex;justify-content:center}
+#pzGrid{display:grid;gap:3px}
+.pzcell{width:52px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px solid var(--b1);border-radius:4px;position:relative;user-select:none;transition:all .15s;font-size:0}
+.pzcell.floor{cursor:none}
+.pzcell.floor:hover:not(.pz-player):not(.pz-visited){border-color:var(--pu2);background:rgba(124,106,247,.07)}
+.pzcell.wall{background:rgba(30,30,50,.8);border-color:rgba(53,53,96,.6);pointer-events:none}
+.pzcell.pz-player{border-color:var(--go);background:rgba(245,200,66,.12);box-shadow:0 0 14px rgba(245,200,66,.35);animation:playerPulse 1.8s ease infinite}
+.pzcell.pz-visited{border-color:rgba(124,106,247,.3);background:rgba(124,106,247,.05)}
+.pzcell.pz-exit{border-color:var(--mi);background:rgba(0,229,160,.07);animation:exitPulse 2s ease infinite}
+.pzcell.pz-key{border-color:var(--go);background:rgba(245,200,66,.06)}
+.pzcell.pz-locked{border-color:rgba(255,107,157,.4);background:rgba(255,107,157,.04);border-style:dashed;pointer-events:none}
+.pzcell.pz-npc{border-color:var(--sk);background:rgba(96,200,255,.06)}
+.pzcell.pz-trap{border-color:rgba(255,107,157,.5);background:rgba(255,107,157,.04)}
+.pzcell.pz-trap.revealed{border-color:var(--ro);background:rgba(255,107,157,.15)}
+.pzcell.pz-blocked{opacity:.3;pointer-events:none}
+.pzcell.pz-reachable:not(.pz-player){box-shadow:inset 0 0 0 1px rgba(124,106,247,.4)}
+.pzcell .pzico{font-size:22px;line-height:1;display:block}
+.pzcell .pztxt{font-family:var(--mono);font-size:6px;color:var(--mu);letter-spacing:.04em;display:block;margin-top:1px}
+.pzcell.pz-player .pztxt{color:var(--go)}
+.pzcell.pz-exit .pztxt{color:var(--mi)}
+.pzcell.pz-key .pztxt{color:var(--go)}
+@keyframes playerPulse{0%,100%{box-shadow:0 0 8px rgba(245,200,66,.35)}50%{box-shadow:0 0 18px rgba(245,200,66,.6)}}
+@keyframes exitPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,160,.3)}50%{box-shadow:0 0 0 5px rgba(0,229,160,0)}}
+.pzcell.bump{animation:bumpAnim .25s ease}
+@keyframes bumpAnim{0%{transform:scale(1)}40%{transform:scale(.9)}100%{transform:scale(1)}}
+.pzcell.move-in{animation:moveIn .2s ease}
+@keyframes moveIn{0%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+/* HINT OVERLAY */
+.pzcell.pz-hint{border-color:var(--sk);animation:hintBlink 1s ease infinite}
+@keyframes hintBlink{0%,100%{background:rgba(96,200,255,.04)}50%{background:rgba(96,200,255,.14)}}
+
+/* DIALOGUE */
+.dlg-box{background:var(--s2);border:1px solid var(--b1);padding:14px;min-height:80px;transition:border-color .3s}
+.dlg-box.dlg-active{border-color:var(--pu)}
+.dlg-speaker{font-family:var(--mono);font-size:8px;color:var(--go);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.dlg-speaker::before{content:'▶';font-size:7px}
+.dlg-text{font-size:13px;color:var(--md);line-height:1.75}
+.dlg-text b{color:var(--tx)}.dlg-text em{color:var(--go);font-style:italic}
+.dlg-choices{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.dchoice{background:var(--s3);border:1px solid var(--b1);padding:9px 13px;font-size:12px;color:var(--md);cursor:none;transition:all .18s;text-align:left;line-height:1.5}
+.dchoice:hover{border-color:var(--pu);color:var(--tx);transform:translateX(3px);background:rgba(124,106,247,.07)}
+.dchoice::before{content:'→ ';color:var(--pu);font-family:var(--mono);font-size:9px}
+
+/* SIDEBAR */
+.nside{padding:16px;background:var(--s2);display:flex;flex-direction:column;gap:10px}
+.nstats{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.nsbox{background:var(--bg);border:1px solid var(--b1);padding:8px;text-align:center}
+.nsv{font-family:var(--head);font-size:17px;font-weight:900;line-height:1;margin-bottom:2px}
+.nsl{font-family:var(--mono);font-size:6px;color:var(--mu);letter-spacing:.08em;text-transform:uppercase}
+.nlog{background:var(--bg);border:1px solid var(--b1);padding:10px;font-family:var(--mono);font-size:8px;line-height:1.9;max-height:150px;overflow-y:auto}
+.nlog .nl{color:var(--mu)}.nlog .nl.important{color:var(--go)}.nlog .nl.danger{color:var(--ro)}.nlog .nl.good{color:var(--mi)}.nlog .nl.info{color:var(--sk)}
+.nrst{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:8px;border:1px solid var(--b1);color:var(--mu);cursor:none;background:none;transition:all .2s;width:100%}
+.nrst:hover{border-color:var(--ro);color:var(--ro)}
+.nleg{background:var(--bg);border:1px solid var(--b1);padding:10px;font-family:var(--mono);font-size:8px;display:flex;flex-direction:column;gap:4px;color:var(--mu)}
+.nleg-t{color:var(--pu);letter-spacing:.08em;text-transform:uppercase;font-size:7px;margin-bottom:3px}
+.nli{display:flex;align-items:center;gap:6px}
+
+/* END */
+.nend{text-align:center;padding:24px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.nend-ico{font-size:52px;animation:floatN 3s ease-in-out infinite}
+@keyframes floatN{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.nend-t{font-family:var(--head);font-size:22px;font-weight:900}
+.nend-tx{font-size:14px;color:var(--md);line-height:1.75;max-width:320px}
+.nend-tag{font-family:var(--mono);font-size:8px;padding:5px 12px;border:1px solid;letter-spacing:.1em;text-transform:uppercase}
+.nend-st{font-family:var(--mono);font-size:8px;color:var(--mu);letter-spacing:.06em}
+
+/* BALANCE CALC */
+.calc{background:var(--s1);border:1px solid var(--b1);margin-bottom:3px}
+.calchd{padding:16px 22px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center}
+.calchdh{font-family:var(--mono);font-size:9px;color:var(--md);letter-spacing:.1em;text-transform:uppercase}
+.calcbody{padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.calcg{margin-bottom:16px}
+.calclbl{font-family:var(--mono);font-size:8px;color:var(--pu);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:6px}
+.calclbl span{color:var(--go);font-size:11px}
+.rng{-webkit-appearance:none;width:100%;height:3px;background:var(--b1);border-radius:2px;outline:none;cursor:none}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--pu);cursor:none;transition:background .2s}
+.rng:hover::-webkit-slider-thumb{background:var(--go)}
+#calcChart{width:100%;height:150px;display:block;background:var(--s2);border:1px solid var(--b1)}
+.ccards{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:10px}
+.ccard{background:var(--s2);border:1px solid var(--b1);padding:12px}
+.ccv{font-size:20px;font-weight:900;font-family:var(--head);line-height:1;margin-bottom:3px}
+.ccl{font-family:var(--mono);font-size:7px;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.ccbar{height:3px;background:var(--b1);border-radius:2px;overflow:hidden}
+.ccfill{height:100%;border-radius:2px;transition:width .5s ease}
+.verdict{background:var(--s2);border:1px solid var(--b1);padding:13px;font-size:12px;color:var(--md);line-height:1.65;grid-column:1/-1}
+.verdict b{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px}
+.vok b{color:var(--mi)}.vwarn b{color:var(--go)}.vbad b{color:var(--ro)}
+
+/* SKILLS */
+.skgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.skc{background:var(--s1);border:1px solid var(--b1);padding:26px;transition:border-color .25s,transform .25s}
+.skc:hover{border-color:var(--pu);transform:translateY(-3px)}
+.skico{font-size:24px;margin-bottom:11px;display:block}
+.skn{font-family:var(--head);font-size:14px;font-weight:700;margin-bottom:6px}
+.skd{font-size:13px;color:var(--md);line-height:1.65;margin-bottom:12px}
+.sktags{display:flex;flex-wrap:wrap;gap:4px}
+.sktag{font-family:var(--mono);font-size:7px;padding:2px 7px;border:1px solid var(--b1);color:var(--mu);letter-spacing:.06em;text-transform:uppercase}
+
+/* PHILOSOPHY */
+.philg{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.philc{background:var(--s1);border:1px solid var(--b1);padding:34px;transition:border-color .25s}
+.philc:hover{border-color:var(--go)}
+.philn{font-family:var(--head);font-size:42px;font-weight:900;color:var(--b2);line-height:1;margin-bottom:11px;transition:color .25s}
+.philc:hover .philn{color:var(--pu)}
+.philt{font-family:var(--head);font-size:15px;font-weight:700;margin-bottom:7px}
+.philtx{font-size:13px;color:var(--md);line-height:1.72}
+
+/* CONTACT */
+.ctwrap{background:var(--s1);border-top:1px solid var(--b1);position:relative;z-index:2}
+.ctinner{max-width:1240px;margin:0 auto;padding:88px 56px;display:grid;grid-template-columns:1fr 420px;gap:70px;align-items:center}
+.ceye{font-family:var(--mono);font-size:9px;color:var(--mi);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.ctitle{font-family:var(--head);font-size:50px;font-weight:900;letter-spacing:-.04em;line-height:.95;margin-bottom:14px}
+.ctitle span{color:var(--pu)}
+.csub{font-size:15px;color:var(--md);line-height:1.75;margin-bottom:34px}
+.clinks{display:flex;flex-direction:column;gap:8px}
+.clink{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--md);text-decoration:none;letter-spacing:.1em;padding:13px 17px;border:1px solid var(--b1);transition:all .2s;cursor:none}
+.clink:hover{border-color:var(--go);color:var(--go);transform:translateX(4px)}
+.term{background:var(--bg);border:1px solid var(--b1);overflow:hidden}
+.termbar{background:var(--s2);padding:9px 14px;display:flex;gap:6px;border-bottom:1px solid var(--b1)}
+.td{width:8px;height:8px;border-radius:50%}
+.termbody{padding:18px;font-family:var(--mono);font-size:10px;line-height:2.1}
+.tp{color:var(--mi)}.tc{color:var(--tx)}.to{color:var(--go);padding-left:16px;display:block}.tm{color:var(--mu);padding-left:16px;display:block}
+.tcur{display:inline-block;width:6px;height:12px;background:var(--pu);vertical-align:text-bottom;animation:blink .9s infinite}
+footer{padding:26px 56px;display:flex;justify-content:space-between;border-top:1px solid var(--b1);position:relative;z-index:2}
+footer p{font-family:var(--mono);font-size:8px;color:var(--mu);letter-spacing:.08em}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--pu);border-radius:2px}
+@media(max-width:900px){nav{padding:14px 20px}.hero{grid-template-columns:1fr;padding:100px 20px 60px;gap:30px}.rcard{display:none}.sec{padding:52px 20px}.twocol{grid-template-columns:1fr}.glayout{grid-template-columns:1fr}.gside{display:none}.nlayout{grid-template-columns:1fr}.nside{display:none}.calcbody{grid-template-columns:1fr}.skgrid{grid-template-columns:1fr 1fr}.philg{grid-template-columns:1fr}.ctinner{grid-template-columns:1fr;padding:52px 20px;gap:32px}.ctitle{font-size:36px}footer{padding:20px;flex-direction:column;gap:8px;text-align:center}.div{margin:0 20px}}
+</style>
+</head>
+<body>
+
+<div id="C"></div><div id="CR"></div>
+<div class="combo-flash" id="CF"></div>
+
+<nav>
+  <div class="nlogo">TI · GAME DESIGNER</div>
+  <ul class="nlinks">
+    <li><a href="#projects">Проекты</a></li>
+    <li><a href="#skills">Навыки</a></li>
+    <li><a href="#philosophy">Подход</a></li>
+    <li><a href="#contact"><span class="nopen"><span class="ndot"></span>Открыт к работе</span></a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="htag rv">Junior Game Designer · Mobile Casual</div>
+    <h1 class="hname rv">Тимур<br><span>Исматов</span></h1>
+    <div class="hrole rv">Механики · Баланс · Нарратив</div>
+    <p class="hbio rv">Проектирую системы, в которые <b>хочется возвращаться</b>. Каждое дизайн-решение проверяю по данным — completion rate, retention, session frequency.</p>
+    <div class="hstats rv">
+      <div class="hs"><div class="hsv">2.5</div><div class="hsl">года в GD</div></div>
+      <div class="hs"><div class="hsv">3</div><div class="hsl">игры в релизе</div></div>
+      <div class="hs"><div class="hsv">120+</div><div class="hsl">уровней</div></div>
+      <div class="hs"><div class="hsv">+22%</div><div class="hsl">D7 retention</div></div>
+    </div>
+    <div class="hbtns rv">
+      <a href="#projects" class="btn btnp">Смотреть проекты</a>
+      <a href="#contact" class="btn btng">Написать</a>
+    </div>
+  </div>
+  <div class="rcard rv">
+    <div class="rbar"><div class="rtitle">Retention curve · Bloom Garden</div><div style="font-family:var(--mono);font-size:8px;color:var(--mi);display:flex;align-items:center;gap:4px"><span class="ndot"></span>Live</div></div>
+    <canvas id="retChart"></canvas>
+    <div class="rleg">
+      <div class="rli"><div class="rdot" style="background:var(--pu)"></div>До редизайна</div>
+      <div class="rli"><div class="rdot" style="background:var(--go)"></div>После</div>
+      <div class="rli"><div class="rdot" style="background:var(--mi);opacity:.5"></div>Бенчмарк</div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<section class="sec" id="projects">
+  <div class="sechead rv"><span class="secn">01</span><h2 class="sect">Проекты</h2><div class="secl"></div></div>
+  <div class="ptabs rv">
+    <button class="ptab on" onclick="switchTab(0)">Bloom Garden</button>
+    <button class="ptab" onclick="switchTab(1)">Wanderpath</button>
+  </div>
+
+  <!-- TAB 0 ────────────────────────────────────────────── -->
+  <div class="ppanel on" id="t0">
+
+    <!-- TIMELINE -->
+    <div class="tl-wrap rv">
+      <div class="tl-head">
+        <span>Как я работал над проектом</span>
+        <span class="tl-badge"><span class="ndot"></span>Bloom Garden · Pixelwave Studios · 2023–н.в.</span>
+      </div>
+      <div class="timeline">
+        <div class="tls">
+          <div class="tld p">!</div>
+          <div class="tll p">Проблема</div>
+          <div class="tlt">D7 retention упал после главы 15</div>
+          <div class="tlb">После прохождения первых 13 глав игроки массово уходили. Данные в Tableau показали: <b>completion rate на уровнях 14–16 ниже 40%</b> — каждый второй бросал именно здесь. DAU падал на 18% в течение двух недель. Нужно было выяснить: проблема в сложности уровней или в отсутствии причины возвращаться?</div>
+          <div class="tlm">
+            <div class="tlmv"><div class="tlmn" style="color:var(--ro)">38%</div><div class="tlml">completion lvl 14</div></div>
+            <div class="tlmv"><div class="tlmn" style="color:var(--ro)">−18%</div><div class="tlml">DAU за 2 нед</div></div>
+          </div>
+        </div>
+        <div class="tls">
+          <div class="tld r">?</div>
+          <div class="tll r">Исследование</div>
+          <div class="tlt">Анализ данных + 6 плейтестов внутри команды</div>
+          <div class="tlb">Построил воронку по каждому уровню 14–22: attempt rate, completion rate, среднее число попыток. <b>Проблема оказалась двойной:</b> уровни 14, 17, 20 объективно слишком жёсткие, остальные — в норме. На плейтестах игроки говорили: «не понимаем, ради чего возвращаться завтра». То есть сложность и мотивация — две разные задачи.</div>
+          <div class="tlm">
+            <div class="tlmv"><div class="tlmn" style="color:var(--sk)">6</div><div class="tlml">плейтестов</div></div>
+            <div class="tlmv"><div class="tlmn" style="color:var(--sk)">3</div><div class="tlml">проблемных уровня</div></div>
+          </div>
+        </div>
+        <div class="tls">
+          <div class="tld s">→</div>
+          <div class="tll s">Решение</div>
+          <div class="tlt">Два параллельных направления</div>
+          <div class="tlb"><b>1. Редизайн «wall» уровней</b> — пересчитал схемы 14, 17 и 20: убрал центральный блокер, добавил бустер в нижний ряд, +1 ход к лимиту. Цель completion rate: 55–65%.<br><br><b>2. Daily Quest System</b> — спроектировал с нуля: 12-страничный GDD, механика ротации квестов, таблицы наград, все edge cases прописаны до того, как программист открыл IDE.</div>
+        </div>
+        <div class="tls">
+          <div class="tld re">✓</div>
+          <div class="tll re">Результат</div>
+          <div class="tlt">Оба решения вышли в релизе v2.4</div>
+          <div class="tlb">Через месяц после релиза: <b>D7 retention вырос с 18% до 22%</b>, MAU +11%, session frequency среди пользователей с квестами +2 сессии в неделю. Completion rate проблемных уровней: lvl 14 → 61%, lvl 17 → 58%, lvl 20 → 62%. За 6 месяцев — 0 критических GD-багов.</div>
+          <div class="tlm">
+            <div class="tlmv"><div class="tlmn" style="color:var(--mi)">22%</div><div class="tlml">D7 retention</div></div>
+            <div class="tlmv"><div class="tlmn" style="color:var(--mi)">+11%</div><div class="tlml">MAU</div></div>
+            <div class="tlmv"><div class="tlmn" style="color:var(--mi)">61%</div><div class="tlml">completion 14</div></div>
+            <div class="tlmv"><div class="tlmn" style="color:var(--mi)">0</div><div class="tlml">critical bugs</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCHEMES -->
+    <div class="twocol rv">
+      <div class="panel">
+        <div class="ptitle">Схема уровня 17 · ДО редизайна <span style="color:var(--ro);font-size:8px">completion 42%</span></div>
+        <div class="scheme-g" id="sb"></div>
+        <div style="font-size:12px;color:var(--mu);margin-top:10px;line-height:1.7">🧱 Блокер в центре <b style="color:var(--tx)">отрезал половину доски</b>. Игроки упирались в тупик на 8–10 ходах.</div>
+      </div>
+      <div class="panel">
+        <div class="ptitle">Схема уровня 17 · ПОСЛЕ редизайна <span style="color:var(--mi);font-size:8px">completion 58%</span></div>
+        <div class="scheme-g" id="sa"></div>
+        <div style="font-size:12px;color:var(--mu);margin-top:10px;line-height:1.7">💣 Бустер внизу даёт «подстраховку». Блокер убран. <b style="color:var(--tx)">+1 ход</b> — незначительно математически, важно психологически.</div>
+      </div>
+    </div>
+
+    <!-- GDD -->
+    <div class="gdd rv">
+      <div class="gddhd"><div class="gddht">📄 GDD — Daily Quest System v3.2</div><div style="font-family:var(--mono);font-size:8px;color:var(--mi);display:flex;align-items:center;gap:4px"><span class="ndot"></span>Released v2.4</div></div>
+      <div class="gddsec">
+        <button class="gddtog on" onclick="tg(this)"><div class="gddtl"><em>01</em>Проблема и гипотеза</div><div class="gddarr">▶</div></button>
+        <div class="gddbody on"><div class="gddcont">
+          <div class="gddrow"><div class="gddk">Проблема</div><div class="gddv">D7 retention падал после гл.15 — <b>не из-за сложности</b>, а из-за отсутствия внешнего мотиватора возвращаться</div></div>
+          <div class="gddrow"><div class="gddk">Гипотеза</div><div class="gddv">Ежедневные задания создадут <b>петлю внешней мотивации</b> независимо от прогресса</div></div>
+          <div class="gddrow"><div class="gddk">Целевые метрики</div><div class="gddv">D7 +10% · session frequency +1.5/нед · MAU +8%</div></div>
+          <div class="gddnote"><b>Инсайт:</b> Незакрытый гештальт — «у меня есть невыполненное задание» — удерживает лучше, чем новый уровень.</div>
+        </div></div>
+      </div>
+      <div class="gddsec">
+        <button class="gddtog" onclick="tg(this)"><div class="gddtl"><em>02</em>Механика и баланс</div><div class="gddarr">▶</div></button>
+        <div class="gddbody"><div class="gddcont">
+          <div class="gddrow"><div class="gddk">Структура</div><div class="gddv">3 квеста/день: лёгкий (2–3 мин), средний (5–8 мин), сложный (10–15 мин)</div></div>
+          <table class="gddtbl">
+            <tr><th>Тип квеста</th><th>Частота</th><th>Время</th><th>Награда</th></tr>
+            <tr><td>Match N цветов</td><td>Ежедн.</td><td>2–3 мин</td><td>50 монет</td></tr>
+            <tr><td>Пройти N уровней</td><td>Ежедн.</td><td>5–8 мин</td><td>80 монет</td></tr>
+            <tr><td>Использовать бустер</td><td>3×/нед</td><td>1–2 мин</td><td>120 монет</td></tr>
+            <tr><td>5 побед подряд</td><td>Еженед.</td><td>10–15 мин</td><td>1 сундук</td></tr>
+          </table>
+        </div></div>
+      </div>
+      <div class="gddsec">
+        <button class="gddtog" onclick="tg(this)"><div class="gddtl"><em>03</em>Edge cases</div><div class="gddarr">▶</div></button>
+        <div class="gddbody"><div class="gddcont">
+          <div class="gddrow"><div class="gddk">Оффлайн</div><div class="gddv">Прогресс локально → синхронизация при подключении</div></div>
+          <div class="gddrow"><div class="gddk">Часовой пояс</div><div class="gddv">Привязка к UTC — исключает «смотку» суток при перелётах</div></div>
+          <div class="gddrow"><div class="gddk">Новый игрок</div><div class="gddv">Квесты открываются после гл.3 — не перегружаем онбординг</div></div>
+          <div class="gddnote"><b>Принцип:</b> Edge cases в GDD до кода — экономит 60% времени на фиксы после QA.</div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- MATCH-3 GAME -->
+    <div class="gw rv">
+      <div class="ghdr">
+        <div class="ghdrt">🎮 Демо механики — Level 17 · Bloom Garden</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--mu)">Реальная схема · Свапай соседние тайлы</div>
+      </div>
+      <div class="glayout">
+        <div class="gmain">
+          <div class="ghud">
+            <div class="hbox"><div class="hv" id="gScore">0</div><div class="hl">Очки</div></div>
+            <div class="hbox"><div class="hv" id="gMoves">18</div><div class="hl">Ходы</div></div>
+            <div class="hbox"><div class="hv" id="gTarget">0/40</div><div class="hl">Цель 🌸</div></div>
+            <div class="hbox"><div class="hv" id="gCombo" style="color:var(--mi)">×1</div><div class="hl">Комбо</div></div>
+          </div>
+          <div id="board"></div>
+          <div class="prog-wrap">
+            <div class="prog-info"><span>Прогресс</span><span id="gPct">0%</span></div>
+            <div class="prog-bar"><div class="prog-fill" id="gProg" style="width:0%"></div></div>
+          </div>
+          <div class="boost-row">
+            <div class="bst" id="b0" onclick="actBoost('bomb')"><span class="bi">💣</span>Бомба<br><span class="bc" id="bc0">×2</span></div>
+            <div class="bst" id="b1" onclick="actBoost('swap')"><span class="bi">🔄</span>Своп<br><span class="bc" id="bc1">×3</span></div>
+            <div class="bst" id="b2" onclick="actBoost('hint')"><span class="bi">💡</span>Хинт<br><span class="bc">∞</span></div>
+            <div class="bst" id="b3" onclick="actBoost('shuffle')"><span class="bi">🎲</span>Шафл<br><span class="bc" id="bc3">×1</span></div>
+          </div>
+        </div>
+        <div class="gside">
+          <div class="glog" id="gLog">
+            <div class="ll"><span class="lt">[00:00]</span><span class="li">Level 17 загружен</span></div>
+            <div class="ll"><span class="lt">[00:00]</span><span class="li">Цель: собрать 40 🌸</span></div>
+            <div class="ll"><span class="lt">[00:00]</span><span class="ls">Свапай соседние тайлы</span></div>
+          </div>
+          <button class="gbtn" onclick="resetGame()">↺ Перезапустить <span>lvl 17</span></button>
+          <div class="gdnote"><b>// Дизайн lvl 17</b>Первый «wall» в гл.3. CR цель: 58%. 🧱 Блокеры отрезают центр. 💣 Бустер = психологическая подстраховка. Комбо 4+ → 🌈 rainbow-тайл.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIFFICULTY CURVE -->
+    <div class="calc rv">
+      <div class="calchd">
+        <div class="calchdh">📈 Кривая сложности уровней · Bloom Garden</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--mu)">Реальные данные · Главы 14–22</div>
+      </div>
+      <div style="padding:20px 26px;border-bottom:1px solid var(--b1);font-size:13px;color:var(--md);line-height:1.7">
+        Каждый уровень я оцениваю по трём показателям: <b style="color:var(--tx)">completion rate</b> (% игроков, прошедших с первой попытки), <b style="color:var(--tx)">среднее число попыток</b> и <b style="color:var(--tx)">дропрейт</b> (% ушедших после провала). Если completion rate падает ниже 45% — это wall: нужно менять схему уровня. Выше 75% — передышка. Двигай ползунок и смотри, как я диагностирую проблему.
+      </div>
+      <div class="calcbody">
+        <div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--pu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">Параметры уровня</div>
+          <div class="calcg"><div class="calclbl">Completion rate <span id="l0">58</span>%</div><input type="range" class="rng" id="r0" min="20" max="90" value="58" oninput="calcBal()"></div>
+          <div class="calcg"><div class="calclbl">Среднее попыток <span id="l1">2.4</span></div><input type="range" class="rng" id="r1" min="10" max="80" value="24" oninput="calcBal()"></div>
+          <div class="calcg"><div class="calclbl">Дропрейт после фейла <span id="l2">18</span>%</div><input type="range" class="rng" id="r2" min="5" max="60" value="18" oninput="calcBal()"></div>
+          <div class="calcg"><div class="calclbl">Ходов в уровне <span id="l3">18</span></div><input type="range" class="rng" id="r3" min="10" max="35" value="18" oninput="calcBal()"></div>
+          <div style="background:var(--bg);border:1px solid var(--b1);padding:12px;margin-top:6px" id="diagBox"></div>
+        </div>
+        <div>
+          <canvas id="calcChart"></canvas>
+          <div class="ccards" id="ccards"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 1 ────────────────────────────────────────────── -->
+  <div class="ppanel" id="t1">
+
+    <!-- TIMELINE WANDERPATH -->
+    <div class="tl-wrap rv">
+      <div class="tl-head">
+        <span>Как я работал над проектом</span>
+        <span class="tl-badge" style="color:var(--go)">● Wanderpath · Личный проект</span>
+      </div>
+      <div class="timeline">
+        <div class="tls">
+          <div class="tld p">!</div>
+          <div class="tll p">Проблема</div>
+          <div class="tlt">Хотел понять, где GDD ломается о реальность</div>
+          <div class="tlb">В команде я никогда не видел <b>полный путь от идеи до работающего кода</b> — всегда только свою часть. Решил сделать игру один, чтобы понять, как дизайн-документ превращается в продукт и где возникают разрывы.</div>
+        </div>
+        <div class="tls">
+          <div class="tld r">?</div>
+          <div class="tll r">Исследование</div>
+          <div class="tlt">8 плейтестов с людьми вне индустрии</div>
+          <div class="tlb">Провёл 8 сессий с людьми без опыта в играх. Главный инсайт: <b>всё, что казалось «очевидным» в GDD, игроки не замечали вообще</b>. «Интуитивно понятная» механика оказалась понятной только мне. Туториал переписывал трижды.</div>
+          <div class="tlm">
+            <div class="tlmv"><div class="tlmn" style="color:var(--sk)">8/8</div><div class="tlml">не поняли туториал</div></div>
+            <div class="tlmv"><div class="tlmn" style="color:var(--sk)">×3</div><div class="tlml">переписан туториал</div></div>
+          </div>
+        </div>
+        <div class="tls">
+          <div class="tld s">→</div>
+          <div class="tll s">Решение</div>
+          <div class="tlt">Каждый шаг = нарративное событие</div>
+          <div class="tlb">Ключевое решение: <b>выбор пути по клеткам — это не оптимизация, это история</b>. Прописал 4000 слов диалогов в Twine, три концовки, систему «иллюзии выбора» в первых двух актах с реальным ветвлением в третьем.</div>
+        </div>
+        <div class="tls">
+          <div class="tld re">✓</div>
+          <div class="tll re">Вывод</div>
+          <div class="tlt">Сделал — сломал — переделал</div>
+          <div class="tlb">Туториал я переписывал три раза. Первые два — потому что думал, что игрок поймёт сам. На третий плейтест наконец дошло: <b>«очевидно» — это всегда про тебя, не про игрока</b>. Теперь когда пишу GDD, сначала описываю что человек видит на экране, потом уже что происходит внутри системы.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WANDERPATH PUZZLE -->
+    <div class="nw rv">
+      <div class="nhdr">
+        <div class="nhdrt">🗺 Wanderpath — демо паззла · Глава 1</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--mu)">Найди ключ → открой дверь → выйди · Ловушки скрыты</div>
+      </div>
+      <div class="nlayout">
+        <div class="nmain" id="nmain">
+          <div class="pzhud">
+            <div class="pzbox"><div class="pzv" id="pzMoves">12</div><div class="pzl">Ходов</div></div>
+            <div class="pzbox"><div class="pzv" id="pzKeys" style="color:var(--mu)">0/1</div><div class="pzl">Ключи</div></div>
+            <div class="pzbox"><div class="pzv" id="pzHp" style="color:var(--ro)">3</div><div class="pzl">Жизни</div></div>
+            <div class="pzbox"><div class="pzv" id="pzLvl" style="color:var(--pu)">1</div><div class="pzl">Уровень</div></div>
+          </div>
+          <div class="pz-grid-wrap"><div id="pzGrid"></div></div>
+          <div class="dlg-box" id="dlgBox">
+            <div class="dlg-text" style="color:var(--mu);font-style:italic">Найди 🗝 ключ, чтобы открыть 🚪 дверь. Осторожно — на карте есть скрытые ловушки.</div>
+          </div>
+        </div>
+        <div class="nside">
+          <div>
+            <div style="font-family:var(--mono);font-size:7px;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Статы героя</div>
+            <div class="nstats">
+              <div class="nsbox"><div class="nsv" id="nHp" style="color:var(--ro)">3</div><div class="nsl">Жизни</div></div>
+              <div class="nsbox"><div class="nsv" id="nKeys" style="color:var(--go)">0</div><div class="nsl">Ключи</div></div>
+              <div class="nsbox"><div class="nsv" id="nSteps" style="color:var(--sk)">0</div><div class="nsl">Шагов</div></div>
+              <div class="nsbox"><div class="nsv" id="nLvl" style="color:var(--pu)">1</div><div class="nsl">Уровень</div></div>
+            </div>
+          </div>
+          <div class="nlog" id="nLog">
+            <div class="nl">Wanderpath запущен</div>
+            <div class="nl info">Ищи 🗝 ключ</div>
+          </div>
+          <div class="nleg">
+            <div class="nleg-t">Легенда</div>
+            <div class="nli">🧭 Ты</div>
+            <div class="nli">🗝 Ключ — подбери</div>
+            <div class="nli">🚪 Дверь — нужен ключ</div>
+            <div class="nli">👤 NPC — поговори</div>
+            <div class="nli">⬛ Стена — не пройти</div>
+            <div class="nli" style="color:var(--ro)">💀 Ловушка — скрыта!</div>
+          </div>
+          <button class="nrst" onclick="pzInit()">↺ Начать заново</button>
+          <div class="gdnote" style="font-size:10px"><b>// GD заметка</b>Ловушки не видны до наступания — так создаётся напряжение без объяснений. Знание о них после смерти меняет поведение: игрок идёт осторожнее.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<section class="sec" id="skills" style="max-width:100%;background:var(--s1);padding-top:88px;padding-bottom:88px">
+  <div style="max-width:1240px;margin:0 auto">
+    <div class="sechead rv"><span class="secn">02</span><h2 class="sect">Навыки</h2><div class="secl"></div></div>
+    <div class="skgrid">
+      <div class="skc rv"><span class="skico">⚙️</span><div class="skn">Механики и системы</div><div class="skd">Проектирую core loop, прогрессию, вторичные механики. GDD пишу так, чтобы программист понял без созвона.</div><div class="sktags"><span class="sktag">Core Loop</span><span class="sktag">GDD</span><span class="sktag">Edge Cases</span><span class="sktag">Progression</span></div></div>
+      <div class="skc rv"><span class="skico">📊</span><div class="skn">Баланс и экономика</div><div class="skd">Считаю экономику в Excel: дропрейты, кривые сложности, монетизационные воронки. Читаю данные в Tableau.</div><div class="sktags"><span class="sktag">Excel</span><span class="sktag">Tableau</span><span class="sktag">Drop Rate</span><span class="sktag">A/B</span></div></div>
+      <div class="skc rv"><span class="skico">✍️</span><div class="skn">Нарратив</div><div class="skd">Пишу диалоги для мобильных игр: коротко, в тоне продукта. Twine, ветвление, нарратив без слов.</div><div class="sktags"><span class="sktag">Twine</span><span class="sktag">Dialogue</span><span class="sktag">Branching</span></div></div>
+      <div class="skc rv"><span class="skico">🗺️</span><div class="skn">Левел-дизайн</div><div class="skd">Проектирую уровни для match-3 и puzzle. Итерирую по completion rate, а не по ощущениям.</div><div class="sktags"><span class="sktag">Level Schemes</span><span class="sktag">Difficulty Arc</span><span class="sktag">Completion Rate</span></div></div>
+      <div class="skc rv"><span class="skico">🧪</span><div class="skn">Плейтестинг</div><div class="skd">Структурированный протокол. Умею перевести фидбек от людей вне индустрии в конкретные правки GDD.</div><div class="sktags"><span class="sktag">Protocol</span><span class="sktag">Interviews</span><span class="sktag">Iteration</span></div></div>
+      <div class="skc rv"><span class="skico">🛠️</span><div class="skn">Инструменты</div><div class="skd">Jira, Confluence, Figma. Unity — собрать прототип и проверить гипотезу.</div><div class="sktags"><span class="sktag">Unity</span><span class="sktag">Figma</span><span class="sktag">Jira</span><span class="sktag">Confluence</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<section class="sec" id="philosophy">
+  <div class="sechead rv"><span class="secn">03</span><h2 class="sect">Подход</h2><div class="secl"></div></div>
+  <div class="philg">
+    <div class="philc rv"><div class="philn">01</div><div class="philt">Сначала смотрю на цифры</div><div class="philtx">Когда completion rate упал до 38% на уровне 14, я не сел переделывать уровень сразу. Сначала посмотрел: это один уровень виноват или игрок просто потерял мотивацию возвращаться? Оказалось — и то, и другое. Если бы угадал с первой попытки — починил бы не то.</div></div>
+    <div class="philc rv"><div class="philn">02</div><div class="philt">GDD пишу для программиста, не для себя</div><div class="philtx">Раньше я писал «игрок зарабатывает монеты» — и потом тратил час на созвон, объясняя как именно. Теперь пишу: «после победы на уровне показывается экран с числом монет, кнопкой забрать и таймером 3 сек». Разработчик не переспрашивает.</div></div>
+    <div class="philc rv"><div class="philn">03</div><div class="philt">Злость — не всегда плохо</div><div class="philtx">Есть злость, после которой хочется попробовать ещё раз — и злость, после которой просто удаляешь игру. Я разобрался, в чём разница, когда переделывал уровень 17: не в сложности, а в том, чувствует ли игрок что у него был шанс.</div></div>
+    <div class="philc rv"><div class="philn">04</div><div class="philt">История — это не отдельный отдел</div><div class="philtx">В Wanderpath я добавил одну реплику персонажа на третьем экране. На плейтестах люди начали останавливаться и перечитывать. Retention в тесте вырос. Один диалог — не нарративный дизайн, но это показало мне, что история и механика тянут одну метрику.</div></div>
+  </div>
+</section>
+
+<div class="ctwrap" id="contact">
+  <div class="ctinner">
+    <div>
+      <div class="ceye"><span class="ndot"></span>Открыт к предложениям</div>
+      <h2 class="ctitle">Давай<br>сделаем<br><span>игру</span></h2>
+      <p class="csub">Ищу позицию Junior GD в мобильной студии. Готов к тестовому заданию, онлайн-знакомству или просто к разговору о геймдизайне.</p>
+      <div class="clinks">
+        <a href="https://t.me/tim_ismatov" class="clink"><span>✈ Telegram</span><span>@tim_ismatov</span></a>
+        <a href="/cdn-cgi/l/email-protection#e68f958b8792928f8b939487a6818b878f8ac885898b" class="clink"><span>✉ Email</span><span><span class="__cf_email__" data-cfemail="e089938d819494898d959281a0878d81898cce838f8d">[email&#160;protected]</span></span></a>
+      </div>
+    </div>
+    <div class="term">
+      <div class="termbar"><div class="td" style="background:#f76a6a"></div><div class="td" style="background:#f7c26a"></div><div class="td" style="background:#6af7b8"></div></div>
+      <div class="termbody">
+        <div style="display:flex;gap:8px"><span class="tp">~$</span><span class="tc">cat profile.json</span></div>
+        <span class="to">{ "role": "Junior Game Designer",</span>
+        <span class="to">&nbsp;"focus": ["mobile","casual","hyper-casual"],</span>
+        <span class="to">&nbsp;"skills": ["mechanics","balance","narrative"],</span>
+        <span class="to">&nbsp;"status": "available" }</span>
+        <div style="height:4px"></div>
+        <div style="display:flex;gap:8px"><span class="tp">~$</span><span class="tc">contact --send<span class="tcur"></span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer><p>© 2025 Тимур Исматов · Game Designer Portfolio</p><p>Built as a game — because it should feel like what I make.</p></footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── CURSOR ────────────────────────────────────────────────────────────────────
+const C=document.getElementById('C'),CR=document.getElementById('CR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;C.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+(function L(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;CR.style.transform=`translate(${rx-15}px,${ry-15}px)`;requestAnimationFrame(L)})();
+
+// ── REVEAL ────────────────────────────────────────────────────────────────────
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.06})
+  .observe.bind(new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.06}));
+const revObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.06});
+document.querySelectorAll('.rv').forEach(el=>revObs.observe(el));
+
+// ── RETENTION CHART ───────────────────────────────────────────────────────────
+function drawRet(){
+  const cv=document.getElementById('retChart');if(!cv)return;
+  const W=cv.offsetWidth||380,H=190;cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');
+  const before=[100,52,38,29,22,18,15],after=[100,60,48,38,30,26,22],bench=[100,55,42,33,26,22,18];
+  const p={l:30,r:8,t:10,b:22},W2=W-p.l-p.r,H2=H-p.t-p.b;
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<=4;i++){const y=p.t+H2*(1-i/4);ctx.strokeStyle='rgba(37,37,64,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p.l,y);ctx.lineTo(W-p.r,y);ctx.stroke();ctx.fillStyle='rgba(68,68,90,.5)';ctx.font='8px Space Mono';ctx.fillText(i*25+'%',0,y+3);}
+  ['D1','D2','D3','D4','D5','D6','D7'].forEach((d,i)=>{const x=p.l+i*W2/6;ctx.fillStyle='rgba(68,68,90,.5)';ctx.font='8px Space Mono';ctx.fillText(d,x-7,H-2);});
+  function line(data,color,dash=[]){ctx.strokeStyle=color;ctx.lineWidth=2;ctx.setLineDash(dash);ctx.beginPath();data.forEach((v,i)=>{const x=p.l+i*W2/6,y=p.t+H2*(1-v/100);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();ctx.setLineDash([]);data.forEach((v,i)=>{const x=p.l+i*W2/6,y=p.t+H2*(1-v/100);ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();});}
+  line(bench,'rgba(0,229,160,.4)',[3,2]);line(before,'#7c6af7');line(after,'#f5c842');
+}
+drawRet();window.addEventListener('resize',drawRet);
+
+// ── TABS ──────────────────────────────────────────────────────────────────────
+function switchTab(i){
+  document.querySelectorAll('.ptab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.ppanel').forEach((p,j)=>p.classList.toggle('on',i===j));
+  if(i===1&&!pzInited){pzInited=true;pzInit(0);}
+}
+
+// ── GDD TOGGLE ────────────────────────────────────────────────────────────────
+function tg(btn){btn.classList.toggle('on');btn.nextElementSibling.classList.toggle('on');}
+
+// ── LEVEL SCHEMES ─────────────────────────────────────────────────────────────
+const EM={f:'🌸',g:'💎',l:'🍃',x:'🧱',b:'💣',e:''};
+const SB=['x','f','f','g','f','f','x','f','x','l','x','l','x','f','l','f','x','f','x','f','l','g','l','f','x','f','l','g','f','f','l','f','l','f','f','l','g','f','l','f','g','l'];
+const SA=['l','f','f','g','f','f','l','f','l','f','l','f','l','f','l','f','f','f','f','f','l','g','l','f','b','f','l','g','f','f','l','f','l','f','f','l','g','f','l','f','g','l'];
+function buildSc(id,data){const el=document.getElementById(id);if(!el)return;el.innerHTML='';data.forEach(t=>{const c=document.createElement('div');c.className='sc '+(t||'e');c.textContent=EM[t]||'';el.appendChild(c);});}
+buildSc('sb',SB);buildSc('sa',SA);
+
+// ══════════════════════════════════════════════════════════════════════
+// MATCH-3 GAME
+// ══════════════════════════════════════════════════════════════════════
+const TYPES=['f','f','f','g','g','l','l'];
+const PTS={f:3,g:5,l:2};
+const LAYOUT=['l','f','f','g','f','f','l','f','l','f','l','f','l','f','l','f','f','f','f','f','l','g','l','f','x','f','l','g','f','f','l','f','l','f','f','l','g','f','b','f','g','l'];
+let board=[],sel=null,score=0,moves=18,flowers=0,combo=1,activeBoost=null,swapA=null,boosts={bomb:2,swap:3,shuffle:1};
+let animLock=false;
+
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function mkCell(t){
+  if(t==='x')return{type:'locked',e:'🧱'};
+  if(t==='b')return{type:'bomb',e:'💣'};
+  const tp=rnd(TYPES);return{type:tp,e:EM[tp]};
+}
+function mkBoard(){
+  board=LAYOUT.map(t=>mkCell(t));
+  score=0;moves=18;flowers=0;combo=1;sel=null;activeBoost=null;swapA=null;animLock=false;
+  document.querySelectorAll('.bst').forEach(b=>b.classList.remove('active'));
+  renderBoard();updateHUD();
+}
+function tileInner(tile){
+  if(!tile)return'';
+  if(tile.type==='locked')return'<span style="font-size:18px">⬛</span>';
+  if(tile.type==='bomb')return'<span class="tile-bomb-ico">💣</span>';
+  if(tile.type==='rainbow')return'<span class="tile-gem tile-rb"></span>';
+  const map={f:'tile-f',g:'tile-g',l:'tile-l'};
+  const cls=map[tile.type]||'tile-f';
+  return`<span class="tile-gem ${cls}"></span>`;
+}
+function renderBoard(){
+  const el=document.getElementById('board');if(!el)return;
+  el.innerHTML='';
+  board.forEach((tile,i)=>{
+    const div=document.createElement('div');
+    let cls='cell';
+    if(!tile||tile.type==='empty'){el.appendChild(document.createElement('div'));return;}
+    if(tile.type==='locked')cls+=' locked';
+    else if(tile.type==='bomb')cls+=' bomb-tile';
+    else if(tile.type==='rainbow')cls+=' rainbow-tile';
+    div.className=cls;
+    div.innerHTML=tileInner(tile);
+    div.dataset.i=i;
+    if(sel===i||swapA===i)div.classList.add('sel');
+    div.addEventListener('click',()=>!animLock&&handleClick(i));
+    el.appendChild(div);
+  });
+}
+function getCell(i){return document.getElementById('board')?.children[i];}
+
+function handleClick(i){
+  const tile=board[i];
+  if(!tile||tile.type==='locked')return;
+
+  // HINT
+  if(activeBoost==='hint'){showHint();deactivateBoost();return;}
+
+  // BOMB
+  if(activeBoost==='bomb'){
+    if(boosts.bomb<=0){addLog('lw','Бомбы нет');return;}
+    boosts.bomb--;document.getElementById('bc0').textContent='×'+boosts.bomb;
+    deactivateBoost();doBomb(i);return;
+  }
+
+  // SWAP
+  if(activeBoost==='swap'){
+    if(swapA===null){swapA=i;renderBoard();return;}
+    if(swapA===i){swapA=null;renderBoard();return;}
+    if(boosts.swap<=0){addLog('lw','Свопов нет');return;}
+    boosts.swap--;document.getElementById('bc1').textContent='×'+boosts.swap;
+    const a=swapA;swapA=null;deactivateBoost();
+    doSwap(a,i);return;
+  }
+
+  // NORMAL
+  if(sel===null){sel=i;renderBoard();return;}
+  if(sel===i){sel=null;renderBoard();return;}
+  const s=sel;sel=null;
+  const ri=Math.floor(i/7),ci=i%7,rs=Math.floor(s/7),cs=s%7;
+  if(Math.abs(ri-rs)+Math.abs(ci-cs)!==1){
+    shakeBoard();addLog('lw','Только соседние клетки');sel=i;renderBoard();return;
+  }
+  doSwap(s,i);
+}
+
+function doSwap(a,b){
+  [board[a],board[b]]=[board[b],board[a]];
+  const matches=findMatches();
+  if(!matches.length){
+    [board[a],board[b]]=[board[b],board[a]];
+    shakeBoard();addLog('lw','Нет совпадений');renderBoard();return;
+  }
+  moves--;
+  animLock=true;
+  processMatches(matches);
+}
+
+function findMatches(){
+  const m=new Set();
+  for(let r=0;r<6;r++)for(let c=0;c<5;c++){
+    const i=r*7+c;
+    if(board[i]&&board[i+1]&&board[i+2]&&!['locked','bomb','rainbow'].includes(board[i].type)&&board[i].type===board[i+1].type&&board[i].type===board[i+2].type){m.add(i);m.add(i+1);m.add(i+2);}
+  }
+  for(let c=0;c<7;c++)for(let r=0;r<4;r++){
+    const i=r*7+c;
+    if(board[i]&&board[i+7]&&board[i+14]&&!['locked','bomb','rainbow'].includes(board[i].type)&&board[i].type===board[i+7].type&&board[i].type===board[i+14].type){m.add(i);m.add(i+7);m.add(i+14);}
+  }
+  return[...m];
+}
+
+function processMatches(matches){
+  const counts={f:0,g:0,l:0};
+  matches.forEach(i=>{const t=board[i]?.type;if(t&&counts[t]!==undefined)counts[t]++;});
+  const pts=matches.reduce((s,i)=>s+(PTS[board[i]?.type]||0)*combo,0);
+  const big=matches.length>=5;
+  // animate vanish
+  matches.forEach(i=>{const c=getCell(i);if(c){c.classList.add('vanish');spawnParticles(c);}});
+  setTimeout(()=>{
+    if(big){
+      const ctr=matches[Math.floor(matches.length/2)];
+      matches.forEach(i=>board[i]=i===ctr?{type:'rainbow',e:'🌈'}:null);
+      combo++;showCombo(combo);
+    } else {
+      matches.forEach(i=>board[i]=null);
+      combo=Math.max(1,combo);
+    }
+    score+=pts;flowers+=counts.f;
+    if(counts.f)addLog('lm',`+${counts.f}🌸 +${pts}pts`+(big?` COMBO×${combo}`:''));
+    if(counts.g)addLog('ls',`+${counts.g}💎 gems`);
+    spawnScorePop(pts,counts.f>0?'var(--go)':'var(--mi)');
+    dropFill();
+  },380);
+}
+
+function dropFill(){
+  for(let c=0;c<7;c++){
+    let col=[];
+    for(let r=5;r>=0;r--){const t=board[r*7+c];if(t&&t.type!=='locked')col.push(t);}
+    for(let r=5;r>=0;r--){
+      const orig=LAYOUT[r*7+c];
+      if(orig==='x'){board[r*7+c]={type:'locked',e:'🧱'};}
+      else{
+        const tile=col.shift()||(()=>{const tp=rnd(TYPES);return{type:tp,e:EM[tp]};})();
+        board[r*7+c]=tile;
+      }
+    }
+  }
+  renderBoard();
+  // animate drop-in for top rows
+  document.querySelectorAll('.cell:not(.locked)').forEach((c,i)=>{
+    if(i<7){c.classList.add('drop-in');setTimeout(()=>c.classList.remove('drop-in'),350);}
+  });
+  updateHUD();
+  // cascade check
+  setTimeout(()=>{
+    const m=findMatches();
+    if(m.length){combo++;processMatches(m);}
+    else{animLock=false;checkEnd();}
+  },370);
+}
+
+function doBomb(i){
+  animLock=true;
+  const r=Math.floor(i/7),c=i%7;
+  const tgts=[];
+  for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const ni=(r+dr)*7+(c+dc);if(ni>=0&&ni<42&&board[ni]&&board[ni].type!=='locked')tgts.push(ni);}
+  let pts=0,fl=0;
+  tgts.forEach(ni=>{const c2=getCell(ni);if(c2)c2.classList.add('vanish');pts+=PTS[board[ni]?.type]||0;if(board[ni]?.type==='f')fl++;});
+  setTimeout(()=>{tgts.forEach(ni=>{board[ni]=null;});score+=pts;flowers+=fl;moves--;addLog('lg',`💣 BOOM! +${fl}🌸 +${pts}pts`);dropFill();},380);
+}
+
+function showHint(){
+  const el=document.getElementById('board');if(!el)return;
+  document.querySelectorAll('.hinted').forEach(c=>c.classList.remove('hinted'));
+  for(let r=0;r<6;r++){
+    for(let c=0;c<5;c++){
+      const i=r*7+c;
+      if(board[i]&&board[i+1]&&board[i+2]&&board[i].type===board[i+1].type&&board[i].type===board[i+2].type&&!['locked','bomb','rainbow'].includes(board[i].type)){
+        [i,i+1,i+2].forEach(idx=>{const cell=el.children[idx];if(cell)cell.classList.add('hinted');});
+        addLog('ls','💡 Подсказка показана');
+        setTimeout(()=>document.querySelectorAll('.hinted').forEach(c=>c.classList.remove('hinted')),2500);
+        return;
+      }
+    }
+  }
+  addLog('lw','Нет очевидных совпадений');
+}
+
+function actBoost(type){
+  if(type==='hint'){showHint();return;}
+  if(type==='shuffle'){
+    if(boosts.shuffle<=0){addLog('lw','Шафл использован');return;}
+    boosts.shuffle--;document.getElementById('bc3').textContent='×'+boosts.shuffle;
+    const free=board.filter(t=>t&&!['locked','bomb','rainbow'].includes(t.type));
+    for(let i=free.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[free[i],free[j]]=[free[j],free[i]];}
+    let fi=0;board.forEach((t,i)=>{if(t&&!['locked','bomb','rainbow'].includes(t.type))board[i]=free[fi++];});
+    renderBoard();addLog('ls','🎲 Шафл выполнен');return;
+  }
+  if(activeBoost===type){deactivateBoost();return;}
+  activeBoost=type;swapA=null;
+  document.querySelectorAll('.bst').forEach(b=>b.classList.remove('active'));
+  document.getElementById(type==='bomb'?'b0':'b1').classList.add('active');
+  addLog('ls',type==='bomb'?'💣 Выбери клетку для взрыва':'🔄 Выбери 2 соседних клетки для свопа');
+}
+function deactivateBoost(){activeBoost=null;swapA=null;document.querySelectorAll('.bst').forEach(b=>b.classList.remove('active'));}
+
+function shakeBoard(){const b=document.getElementById('board');b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),320);}
+
+function spawnParticles(cell){
+  const rect=cell.getBoundingClientRect();
+  ['✨','⭐','💫'].forEach(e=>{
+    const p=document.createElement('div');p.className='particle';p.textContent=e;
+    p.style.left=rect.left+rect.width/2-8+'px';p.style.top=rect.top+rect.height/2-8+'px';
+    p.style.setProperty('--px',(Math.random()*70-35)+'px');
+    p.style.setProperty('--py',(Math.random()*-55-10)+'px');
+    document.body.appendChild(p);setTimeout(()=>p.remove(),650);
+  });
+}
+
+function spawnScorePop(pts,color){
+  const p=document.createElement('div');p.className='score-pop';
+  p.textContent='+'+pts;p.style.color=color;
+  const board=document.getElementById('board');
+  if(!board)return;
+  const r=board.getBoundingClientRect();
+  p.style.left=r.left+r.width/2+'px';p.style.top=r.top+r.height/2+'px';
+  document.body.appendChild(p);setTimeout(()=>p.remove(),850);
+}
+
+function showCombo(n){
+  const el=document.getElementById('CF');el.textContent='COMBO ×'+n+'!';
+  el.classList.remove('show');void el.offsetWidth;el.classList.add('show');
+}
+
+function updateHUD(){
+  const pct=Math.min(100,flowers/40*100);
+  document.getElementById('gScore').textContent=score;
+  document.getElementById('gMoves').textContent=moves;
+  document.getElementById('gTarget').textContent=flowers+'/40';
+  document.getElementById('gCombo').textContent='×'+combo;
+  document.getElementById('gPct').textContent=Math.round(pct)+'%';
+  document.getElementById('gProg').style.width=pct+'%';
+}
+
+function checkEnd(){
+  if(flowers>=40){addLog('lm','🎉 ПОБЕДА!');setTimeout(()=>{mkBoard();addLog('li','Уровень перезапущен');},2500);}
+  else if(moves<=0){addLog('lw','❌ Ходов нет — переигровка');setTimeout(()=>{mkBoard();},2000);}
+}
+
+let logCt=0;
+function addLog(cls,msg){
+  const log=document.getElementById('gLog');if(!log)return;
+  const t=new Date(),ts=`[${String(t.getMinutes()).padStart(2,'0')}:${String(t.getSeconds()).padStart(2,'0')}]`;
+  const line=document.createElement('div');line.className='ll';
+  line.innerHTML=`<span class="lt">${ts}</span><span class="${cls}">${msg}</span>`;
+  log.appendChild(line);log.scrollTop=log.scrollHeight;
+}
+function resetGame(){mkBoard();addLog('li','↺ Перезапуск');}
+if(document.getElementById('board'))mkBoard();
+
+// ══════════════════════════════════════════════════════════════════════
+// WANDERPATH PUZZLE ENGINE
+// Keys → Doors → Exit, hidden traps, NPC dialogues, 3 levels
+const PZ_LEVELS=[
+  {name:'Руины замка',cols:9,rows:7,moves:18,
+   grid:['#','#','#','#','#','#','#','#','#',
+         '#','S','.','.','.','#','N','.','#',
+         '#','.','.','#','.','.','.','T','#',
+         '#','#','.','K','.','#','#','.','#',
+         '#','T','.','#','.','.','.','D','#',
+         '#','.','.','.','#','.','E','.','#',
+         '#','#','#','#','#','#','#','#','#'],
+   npcId:'N',
+   npcLines:['<em>«Не наступай на тёмные плитки»</em>, — шепчет голос.',
+             '<b>«Ключ спрятан в центре. Обходи углы».</b>'],
+   hint:'Найди ключ в центре карты. Ловушки скрыты — двигайся осторожно.',
+   endText:'Ты вышел из руин. <em>Ловушки позади, дверь открыта.</em><br><b>Что дальше?</b>',
+   endTag:'Уровень 1 пройден',endColor:'var(--mi)',
+  },
+  {name:'Тёмная библиотека',cols:9,rows:7,moves:22,
+   grid:['#','#','#','#','#','#','#','#','#',
+         '#','S','.','.','T','.','.','#','#',
+         '#','#','T','#','.','#','.','.','#',
+         '#','K','.','.','.','T','N','.','#',
+         '#','#','#','.','#','#','.','T','#',
+         '#','.','.','.','.','.','.','D','#',
+         '#','#','E','#','#','#','#','#','#'],
+   npcId:'N',
+   npcLines:['Старый библиотекарь поднимает взгляд.',
+             '<em>«Три шага вперёд, один назад — так обходят ловушки».</em>'],
+   hint:'Поговори с NPC — он даст подсказку. Ловушек стало больше.',
+   endText:'Книги падают с полок. <em>Ты успел.</em><br><b>За дверью — лестница вниз.</b>',
+   endTag:'Уровень 2 пройден',endColor:'var(--pu)',
+  },
+  {name:'Тронный зал',cols:9,rows:7,moves:26,
+   grid:['#','#','#','#','#','#','#','#','#',
+         '#','.','.','T','.','T','.','S','#',
+         '#','T','#','#','.','#','#','.','#',
+         '#','.','K','.','.','.','.','T','#',
+         '#','#','#','.','#','T','#','.','#',
+         '#','N','.','.','.','.','.','D','#',
+         '#','#','#','E','#','#','#','#','#'],
+   npcId:'N',
+   npcLines:['Страж скрещивает руки.',
+             '<b>«Ключ на троне. Трон в центре. Дорога — через тени».</b>'],
+   hint:'Старт справа — выход слева. Ключ в центре. Стражник поможет.',
+   endText:'<b>Тронный зал пройден.</b><br><em>Где-то впереди — другой мир.</em><br><br>Wanderpath продолжается.',
+   endTag:'Финал демо — все уровни пройдены',endColor:'var(--go)',
+  },
+];
+
+let pzLevel=0,pzPos=0,pzMovesLeft=0,pzKeys=0,pzHp=3,pzSteps=0;
+let pzGrid=[],pzCols=0,pzRows=0,pzRevealed=new Set(),pzVisited=new Set();
+let pzDoorOpen=false,pzNpcDone=false,pzAnimLock=false,pzInited=false;
+
+function pzInit(lvl){
+  if(lvl!==undefined)pzLevel=lvl;
+  const L=PZ_LEVELS[pzLevel];
+  pzCols=L.cols;pzRows=L.rows;pzGrid=L.grid.slice();
+  pzMovesLeft=L.moves;pzKeys=0;pzHp=3;pzSteps=0;
+  pzDoorOpen=false;pzNpcDone=false;pzRevealed=new Set();pzVisited=new Set();pzAnimLock=false;
+  pzPos=pzGrid.indexOf('S');pzVisited.add(pzPos);
+  pzRender();pzUpdateHud();
+  pzSetDlg(null,'<span style="color:var(--mu);font-style:italic">'+L.hint+'</span>');
+  nLog('Уровень '+(pzLevel+1)+': '+L.name,'info');
+}
+
+function pzAdj(pos){
+  const r=Math.floor(pos/pzCols),c=pos%pzCols,res=[];
+  if(r>0)res.push(pos-pzCols);if(r<pzRows-1)res.push(pos+pzCols);
+  if(c>0)res.push(pos-1);if(c<pzCols-1)res.push(pos+1);
+  return res;
+}
+
+function pzRender(){
+  const el=document.getElementById('pzGrid');if(!el)return;
+  el.style.gridTemplateColumns='repeat('+pzCols+',52px)';
+  el.innerHTML='';
+  const reach=pzAdj(pzPos).filter(i=>pzGrid[i]!=='#');
+  pzGrid.forEach((cell,i)=>{
+    const div=document.createElement('div');div.className='pzcell';
+    const isP=i===pzPos,isW=cell==='#',isVis=pzVisited.has(i)&&!isP,isR=reach.includes(i);
+    if(isW){div.classList.add('wall');div.innerHTML='<span class="pzico">⬛</span>';}
+    else if(isP){div.classList.add('pz-player');div.innerHTML='<span class="pzico">🧭</span><span class="pztxt">ты</span>';}
+    else if(cell==='T'&&pzRevealed.has(i)){div.classList.add('pz-trap','revealed');div.innerHTML='<span class="pzico">💀</span><span class="pztxt">ловушка</span>';}
+    else if(cell==='T'){div.classList.add('floor');if(isVis)div.classList.add('pz-visited');if(isR)div.classList.add('pz-reachable');div.innerHTML='<span class="pzico" style="opacity:.12">·</span>';}
+    else if(cell==='K'){div.classList.add('pz-key');div.innerHTML='<span class="pzico">🗝</span><span class="pztxt">ключ</span>';}
+    else if(cell==='D'){div.classList.add(pzDoorOpen?'pz-exit':'pz-locked');div.innerHTML='<span class="pzico">'+(pzDoorOpen?'🚪':'🔒')+'</span><span class="pztxt">'+(pzDoorOpen?'открыта':'закрыта')+'</span>';}
+    else if(cell==='E'){div.classList.add('pz-exit');div.innerHTML='<span class="pzico">✨</span><span class="pztxt">выход</span>';}
+    else if(cell==='N'){div.classList.add('pz-npc');div.innerHTML='<span class="pzico">'+(pzNpcDone?'💬':'👤')+'</span><span class="pztxt">'+(pzNpcDone?'говорил':'NPC')+'</span>';}
+    else{div.classList.add('floor');if(isVis)div.classList.add('pz-visited');if(isR)div.classList.add('pz-reachable');div.innerHTML='<span class="pzico" style="opacity:.1">·</span>';}
+    if(!isW&&!isP)div.addEventListener('click',()=>!pzAnimLock&&pzMove(i));
+    el.appendChild(div);
+  });
+}
+
+function pzMove(target){
+  const adj=pzAdj(pzPos);
+  if(!adj.includes(target)){
+    const el=document.getElementById('pzGrid');
+    if(el){const pc=el.children[pzPos];if(pc){pc.classList.add('bump');setTimeout(()=>pc.classList.remove('bump'),280);}}
+    pzSetDlg(null,'<span style="color:var(--ro)">Можно идти только на <b>соседние</b> клетки.</span>');return;
+  }
+  const cell=pzGrid[target];
+  if(cell==='#')return;
+  if(cell==='D'&&!pzDoorOpen){
+    pzSetDlg('🔒 Дверь','<b>Нужен ключ</b> чтобы открыть дверь.');
+    const el=document.getElementById('pzGrid');if(el){const dc=el.children[target];if(dc){dc.classList.add('bump');setTimeout(()=>dc.classList.remove('bump'),280);}}
+    return;
+  }
+  pzAnimLock=true;pzVisited.add(pzPos);pzPos=target;pzMovesLeft--;pzSteps++;
+  if(cell==='T'){
+    pzRevealed.add(target);pzHp--;
+    pzRender();pzUpdateHud();
+    pzSetDlg('💀 Ловушка!','<b>Скрытая ловушка!</b> Жизни: '+pzHp+'/3.<br><em>'+(pzHp>0?'Знай: ловушки теперь видны — возвращайся умнее.':'Жизни закончились...')+'</em>');
+    nLog('💀 Ловушка! Жизни: '+pzHp,'danger');
+    pzAnimLock=false;
+    if(pzHp<=0)setTimeout(pzFail,1400);
+    return;
+  }
+  if(cell==='K'){
+    pzKeys++;pzDoorOpen=true;pzGrid[target]='.';
+    pzSetDlg('🗝 Ключ подобран!','<b>Дверь теперь открыта.</b> Найди 🚪 и пройди к выходу ✨');
+    nLog('🗝 Ключ! Дверь открыта','good');
+    pzRender();pzUpdateHud();pzAnimLock=false;return;
+  }
+  if(cell==='N'&&!pzNpcDone){
+    pzNpcDone=true;
+    const L=PZ_LEVELS[pzLevel];
+    const box=document.getElementById('dlgBox');
+    if(box){box.classList.add('dlg-active');box.innerHTML='<div class="dlg-speaker">👤 NPC</div><div class="dlg-text">'+L.npcLines.join('<br>')+'</div><div class="dlg-choices"><button class="dchoice" onclick="pzCloseDlg()">Понял, спасибо</button></div>';}
+    nLog('💬 Разговор с NPC','info');
+    pzRender();pzUpdateHud();pzAnimLock=false;return;
+  }
+  if(cell==='E'){pzRender();pzUpdateHud();pzAnimLock=false;setTimeout(pzWin,350);return;}
+  pzRender();pzUpdateHud();pzAnimLock=false;
+  if(pzMovesLeft<=0)setTimeout(pzFail,600);
+}
+
+function pzCloseDlg(){
+  const box=document.getElementById('dlgBox');
+  if(box){box.classList.remove('dlg-active');box.innerHTML='<div class="dlg-text" style="color:var(--mu);font-style:italic">Продолжай путь...</div>';}
+}
+
+function pzSetDlg(spkr,txt){
+  const box=document.getElementById('dlgBox');if(!box)return;
+  box.classList.remove('dlg-active');
+  box.innerHTML=(spkr?'<div class="dlg-speaker">'+spkr+'</div>':'')+'<div class="dlg-text">'+txt+'</div>';
+}
+
+function pzWin(){
+  const L=PZ_LEVELS[pzLevel];
+  const main=document.getElementById('nmain');if(!main)return;
+  nLog('✨ Уровень пройден!','good');
+  const next=pzLevel+1,hasNext=next<PZ_LEVELS.length;
+  main.innerHTML='<div class="nend"><div class="nend-ico">✨</div><div class="nend-t" style="color:'+L.endColor+'">'+L.endTag+'</div><div class="nend-tx">'+L.endText+'</div><div class="nend-tag" style="border-color:'+L.endColor+';color:'+L.endColor+'">'+L.endTag+'</div><div class="nend-st">Ходов: '+pzSteps+' из '+L.moves+' · Жизней: '+pzHp+'/3</div>'+(hasNext?'<button class="btn btnp" onclick="pzStartNext()" style="margin-top:8px">Уровень '+(next+1)+': '+PZ_LEVELS[next].name+' →</button>':'<div style="font-family:var(--mono);font-size:9px;color:var(--mu);margin-top:8px">Это был финал демо Wanderpath</div>')+'</div>';
+}
+
+function pzFail(){
+  const main=document.getElementById('nmain');if(!main)return;
+  const reason=pzHp<=0?'💀 Попал в ловушку':'⏱ Ходы кончились';
+  const tip=pzHp<=0?'Ловушки не видны — пока не наступишь. После смерти они видны. Игрок идёт умнее.':'Попробуй более короткий маршрут к ключу.';
+  main.innerHTML='<div class="nend"><div class="nend-ico">💀</div><div class="nend-t" style="color:var(--ro)">'+reason+'</div><div class="nend-tx">'+tip+'<br><br><em>GD-принцип: смерть должна учить, а не наказывать.</em></div><button class="btn btnp" onclick="pzInit()" style="margin-top:8px">↺ Попробовать снова</button></div>';
+}
+
+function pzStartNext(){
+  pzLevel++;
+  const main=document.getElementById('nmain');
+  if(main)main.innerHTML='<div class="pzhud"><div class="pzbox"><div class="pzv" id="pzMoves">--</div><div class="pzl">Ходов</div></div><div class="pzbox"><div class="pzv" id="pzKeys" style="color:var(--mu)">0/1</div><div class="pzl">Ключи</div></div><div class="pzbox"><div class="pzv" id="pzHp" style="color:var(--ro)">3</div><div class="pzl">Жизни</div></div><div class="pzbox"><div class="pzv" id="pzLvl" style="color:var(--pu)">'+(pzLevel+1)+'</div><div class="pzl">Уровень</div></div></div><div class="pz-grid-wrap"><div id="pzGrid"></div></div><div class="dlg-box" id="dlgBox"><div class="dlg-text" style="color:var(--mu);font-style:italic">Загрузка...</div></div>';
+  setTimeout(()=>pzInit(pzLevel),50);
+}
+
+function pzUpdateHud(){
+  const L=PZ_LEVELS[pzLevel];
+  const kTotal=L.grid.filter(c=>c==='K').length;
+  const m=document.getElementById('pzMoves');if(m)m.textContent=Math.max(0,pzMovesLeft);
+  const k=document.getElementById('pzKeys');if(k){k.textContent=pzKeys+'/'+kTotal;k.style.color=pzKeys>0?'var(--go)':'var(--mu)';}
+  const h=document.getElementById('pzHp');if(h){h.textContent=pzHp;h.style.color=pzHp<=1?'var(--ro)':pzHp<=2?'var(--go)':'var(--mi)';}
+  const lv=document.getElementById('pzLvl');if(lv)lv.textContent=pzLevel+1;
+  const nh=document.getElementById('nHp');if(nh){nh.textContent=pzHp;nh.style.color=pzHp<=1?'var(--ro)':pzHp<=2?'var(--go)':'var(--mi)';}
+  const nk=document.getElementById('nKeys');if(nk)nk.textContent=pzKeys;
+  const ns2=document.getElementById('nSteps');if(ns2)ns2.textContent=pzSteps;
+  const nl2=document.getElementById('nLvl');if(nl2)nl2.textContent=pzLevel+1;
+}
+
+function nLog(msg,type){
+  const log=document.getElementById('nLog');if(!log)return;
+  const d=document.createElement('div');d.className='nl'+(type?' '+type:'');
+  d.textContent=msg;log.appendChild(d);log.scrollTop=log.scrollHeight;
+}
+
+// ── DIFFICULTY CURVE CALCULATOR ─────────────────────────────────────────────
+const BASE_CURVE=[42,71,52,68,38,74,58,65,62];
+function calcBal(){
+  const v=i=>+document.getElementById('r'+i).value;
+  const cr=v(0),attRaw=v(1),drop=v(2),moves=v(3);
+  const att=attRaw/10;
+  document.getElementById('l0').textContent=cr;
+  document.getElementById('l1').textContent=att.toFixed(1);
+  document.getElementById('l2').textContent=drop;
+  document.getElementById('l3').textContent=moves;
+
+  const cv=document.getElementById('calcChart');if(!cv)return;
+  cv.width=cv.offsetWidth||400;cv.height=160;
+  const ctx=cv.getContext('2d'),W=cv.width,H=160;
+  const pad={l:32,r:10,t:16,b:28},W2=W-pad.l-pad.r,H2=H-pad.t-pad.b;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='rgba(13,13,26,.9)';ctx.fillRect(0,0,W,H);
+
+  // Zone fills
+  const wallY=pad.t+H2*(1-0.45);
+  const easyY=pad.t+H2*(1-0.75);
+  ctx.fillStyle='rgba(255,107,157,.07)';ctx.fillRect(pad.l,wallY,W2,H2-(wallY-pad.t));
+  ctx.fillStyle='rgba(0,229,160,.05)';ctx.fillRect(pad.l,pad.t,W2,easyY-pad.t);
+
+  // Grid lines
+  [25,45,65,85].forEach(pct=>{
+    const y=pad.t+H2*(1-pct/100);
+    ctx.strokeStyle='rgba(37,37,64,.6)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+    ctx.fillStyle='rgba(68,68,90,.7)';ctx.font='8px Space Mono';ctx.fillText(pct+'%',0,y+3);
+  });
+  ctx.setLineDash([]);
+
+  ctx.font='7px Space Mono';
+  ctx.fillStyle='rgba(255,107,157,.5)';ctx.fillText('WALL',pad.l+2,H-pad.b+2);
+  ctx.fillStyle='rgba(0,229,160,.4)';ctx.fillText('EASY',pad.l+2,pad.t+10);
+
+  // Curve with current level plugged in
+  const curve=BASE_CURVE.slice();curve[3]=cr; // level 17 is index 3
+  const lvls=curve.length;
+  ctx.strokeStyle='rgba(124,106,247,.5)';ctx.lineWidth=1.5;ctx.setLineDash([4,2]);
+  ctx.beginPath();
+  curve.forEach((val,i)=>{const x=pad.l+i*W2/(lvls-1),y=pad.t+H2*(1-(val/100));i?ctx.lineTo(x,y):ctx.moveTo(x,y);});
+  ctx.stroke();ctx.setLineDash([]);
+
+  // Dots
+  curve.forEach((val,i)=>{
+    const x=pad.l+i*W2/(lvls-1),y=pad.t+H2*(1-(val/100));
+    const isSel=i===3;
+    ctx.beginPath();ctx.arc(x,y,isSel?7:3.5,0,Math.PI*2);
+    ctx.fillStyle=isSel?'var(--go)':val<45?'var(--ro)':val>75?'var(--mi)':'var(--pu)';
+    ctx.fill();
+    if(isSel){ctx.strokeStyle='rgba(7,7,15,.8)';ctx.lineWidth=2;ctx.stroke();
+      ctx.fillStyle='var(--go)';ctx.font='bold 9px Space Mono';ctx.fillText(cr+'%',x-12,y-10);}
+    ctx.fillStyle='rgba(136,136,170,.6)';ctx.font='7px Space Mono';ctx.fillText('L'+(14+i),x-5,H-pad.b+10);
+  });
+
+  // Diagnosis
+  let diagColor,diagTitle,diagText;
+  if(cr<45){
+    diagColor='var(--ro)';diagTitle='WALL — нужно переделывать';
+    diagText='CR '+cr+'% — больше половины уходят. Смотрю на схему: блокер в центре или мало ходов. Цель: поднять до 55–65%.';
+  } else if(cr<55){
+    diagColor='var(--go)';diagTitle='На грани — следить';
+    diagText='Тяжёлый, но проходимый. Среднее попыток '+att.toFixed(1)+'. Дропрейт '+drop+'%: если выше 25% — игрок сдаётся, а не злится.';
+  } else if(cr<75){
+    diagColor='var(--mi)';diagTitle='Норма — целевая зона';
+    diagText='CR '+cr+'% — золотая зона. Игрок чувствует себя умным, не везучим. Дропрейт '+drop+'% в рамках нормы.';
+  } else {
+    diagColor='var(--sk)';diagTitle='Слишком легко — передышка';
+    diagText='CR '+cr+'% — хорошо раз в 5–7 уровней как пауза, но не ставить подряд — интерес падает.';
+  }
+
+  const diagBox=document.getElementById('diagBox');
+  if(diagBox)diagBox.innerHTML='<div style="font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:'+diagColor+';margin-bottom:5px">'+diagTitle+'</div><div style="font-size:12px;color:var(--md);line-height:1.7">'+diagText+'</div>';
+
+  let crC=cr<45?'var(--ro)':cr<55?'var(--go)':cr<75?'var(--mi)':'var(--sk)';
+  let drC=drop>30?'var(--ro)':drop>20?'var(--go)':'var(--mi)';
+  document.getElementById('ccards').innerHTML=
+    '<div class="ccard"><div class="ccv" style="color:'+crC+'">'+cr+'%</div><div class="ccl">Completion rate</div><div class="ccbar"><div class="ccfill" style="width:'+cr+'%;background:'+crC+'"></div></div></div>'+
+    '<div class="ccard"><div class="ccv" style="color:var(--pu)">'+att.toFixed(1)+'</div><div class="ccl">Попыток в среднем</div><div class="ccbar"><div class="ccfill" style="width:'+Math.min(100,att/5*100)+'%;background:var(--pu)"></div></div></div>'+
+    '<div class="ccard"><div class="ccv" style="color:'+drC+'">'+drop+'%</div><div class="ccl">Дропрейт после фейла</div><div class="ccbar"><div class="ccfill" style="width:'+drop+'%;background:'+drC+'"></div></div></div>'+
+    '<div class="ccard"><div class="ccv" style="color:var(--go)">'+moves+'</div><div class="ccl">Ходов в уровне</div><div class="ccbar"><div class="ccfill" style="width:'+Math.min(100,moves/35*100)+'%;background:var(--go)"></div></div></div>';
+}
+calcBal();
+</script>
+</body>
+</html>
